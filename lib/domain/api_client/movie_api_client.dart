@@ -5,8 +5,7 @@ import 'package:kino/domain/entity/popular_movie_response.dart';
 
 /*
 1)нет сети
-2)нет ответа, таймаут соедениения
-
+2)нет ответа, таймаут соединения
 
 3) сервер недоступен
 4) сервер не может обработать запрашиваемый запрос
@@ -23,7 +22,7 @@ class MovieApiClient {
     String locale,
     String apiKey,
   ) async {
-    parser(dynamic json) {
+    PopularMovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularMovieResponse.fromJson(jsonMap);
       return response;
@@ -45,43 +44,55 @@ class MovieApiClient {
     int page,
     String locale,
     String query,
-     String apiKey,
+    String apiKey,
   ) async {
-    parser(dynamic json) {
+    PopularMovieResponse parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = PopularMovieResponse.fromJson(jsonMap);
       return response;
     }
 
-    final result = _networkClient
-        .get('/search/movie', parser, <String, dynamic>{
-          'api_key': apiKey,
-          'page': page.toString(),
-          'language': locale,
-          'query': query,
-          'include_adult': true.toString(),
-        });
+    final result = _networkClient.get(
+      '/search/movie',
+      parser,
+      <String, dynamic>{
+        'api_key': apiKey,
+        'page': page.toString(),
+        'language': locale,
+        'query': query,
+        'include_adult': true.toString(),
+      },
+    );
     return result;
   }
 
-  Future<MovieDetails> movieDetails(int movieId, String locale) async {
-    parser(dynamic json) {
+  Future<MovieDetails> movieDetails(
+    int movieId,
+    String locale,
+  ) async {
+    MovieDetails parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final response = MovieDetails.fromJson(jsonMap);
       return response;
     }
 
-    final result = _networkClient
-        .get('/movie/$movieId', parser, <String, dynamic>{
-          'append_to_response': 'credits,videos',
-          'api_key': Configuration.apiKey,
-          'language': locale,
-        });
+    final result = _networkClient.get(
+      '/movie/$movieId',
+      parser,
+      <String, dynamic>{
+        'append_to_response': 'credits,videos',
+        'api_key': Configuration.apiKey,
+        'language': locale,
+      },
+    );
     return result;
   }
 
-  Future<bool> isFavorite(int movieId, String sessionId) async {
-    parser(dynamic json) {
+  Future<bool> isFavorite(
+    int movieId,
+    String sessionId,
+  ) async {
+    bool parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final result = jsonMap['favorite'] as bool;
       return result;

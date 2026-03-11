@@ -19,7 +19,7 @@ class AuthApiClient {
   }
 
   Future<String> _makeToken() async {
-    parser(dynamic json) {
+    String parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final token = jsonMap['request_token'] as String;
       return token;
@@ -38,37 +38,41 @@ class AuthApiClient {
     required String password,
     required String requestToken,
   }) async {
-    parser(dynamic json) {
+    String parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final token = jsonMap['request_token'] as String;
       return token;
     }
 
-    final bodyParameters = <String, dynamic>{
+    final parameters = <String, dynamic>{
       'username': username,
       'password': password,
       'request_token': requestToken,
     };
     final result = _networkClient.post(
       '/authentication/token/validate_with_login',
-      bodyParameters,
+      parameters,
       parser,
       <String, dynamic>{'api_key': Configuration.apiKey},
     );
     return result;
   }
 
-  Future<String> _makeSession({required String requestToken}) async {
-    parser(dynamic json) {
+  Future<String> _makeSession({
+    required String requestToken,
+  }) async {
+    String parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final sessionId = jsonMap['session_id'] as String;
       return sessionId;
     }
 
-    final bodyParameters = <String, dynamic>{'request_token': requestToken};
+    final parameters = <String, dynamic>{
+      'request_token': requestToken,
+    };
     final result = _networkClient.post(
       '/authentication/session/new',
-      bodyParameters,
+      parameters,
       parser,
       <String, dynamic>{'api_key': Configuration.apiKey},
     );

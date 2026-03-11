@@ -17,17 +17,23 @@ extension MediaTypeAsString on MediaType {
 class AccountApiClient {
   final _networkClient = NetworkClient();
 
-  Future<int> getAccountInfo(String sessionId) async {
-    parser(dynamic json) {
+  Future<int> getAccountInfo(
+    String sessionId,
+  ) async {
+    int parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final result = jsonMap['id'] as int;
       return result;
     }
 
-    final result = _networkClient.get('/account', parser, <String, dynamic>{
-      'api_key': Configuration.apiKey,
-      'session_id': sessionId,
-    });
+    final result = _networkClient.get(
+      '/account',
+      parser,
+      <String, dynamic>{
+        'api_key': Configuration.apiKey,
+        'session_id': sessionId,
+      },
+    );
     return result;
   }
 
@@ -38,18 +44,18 @@ class AccountApiClient {
     required int mediaId,
     required bool isFavorite,
   }) async {
-    parser(dynamic json) {
+    int parser(dynamic json) {
       return 1;
     }
 
-    final bodyParameters = <String, dynamic>{
+    final parameters = <String, dynamic>{
       'media_type': mediaType.asString(),
       'media_id': mediaId,
       'favorite': isFavorite,
     };
     final result = _networkClient.post(
       '/account/$accountId/favorite',
-      bodyParameters,
+      parameters,
       parser,
       <String, dynamic>{
         'api_key': Configuration.apiKey,
