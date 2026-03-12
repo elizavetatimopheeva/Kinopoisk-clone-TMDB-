@@ -2,6 +2,7 @@ import 'package:kino/configuration/configuration.dart';
 import 'package:kino/domain/api_client/network_client.dart';
 import 'package:kino/domain/entity/movie_details.dart';
 import 'package:kino/domain/entity/popular_movie_response.dart';
+import 'package:kino/domain/entity/popular_tv.dart';
 
 /*
 1)нет сети
@@ -39,6 +40,32 @@ class MovieApiClient {
     );
     return result;
   }
+
+
+  Future<PopularTVResponse> popularTV(
+    int page,
+    String locale,
+    String apiKey,
+  ) async {
+    PopularTVResponse parser(dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final response = PopularTVResponse.fromJson(jsonMap);
+      return response;
+    }
+
+    final result = _networkClient.get(
+      '/tv/popular',
+      parser,
+      <String, dynamic>{
+        'api_key': apiKey,
+        'page': page.toString(),
+        'language': locale,
+      },
+    );
+    return result;
+  }
+
+
 
   Future<PopularMovieResponse> searchMovie(
     int page,

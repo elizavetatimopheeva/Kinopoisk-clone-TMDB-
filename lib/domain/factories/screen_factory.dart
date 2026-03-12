@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kino/domain/blocs/auth_bloc.dart';
 import 'package:kino/domain/blocs/movie_list_bloc.dart';
 import 'package:kino/domain/blocs/news_bloc.dart';
-import 'package:kino/domain/services/auth_service.dart';
+import 'package:kino/domain/blocs/tv_bloc.dart';
 import 'package:kino/ui/widgets/auth/auth_view_cubit.dart';
 import 'package:kino/ui/widgets/auth/auth_widget.dart';
 import 'package:kino/ui/widgets/loader_widget/loader_view_cubit.dart';
@@ -16,6 +16,7 @@ import 'package:kino/ui/widgets/movie_list/movie_list_widget.dart';
 import 'package:kino/ui/widgets/movie_trailer/movie_trailer_widget.dart';
 import 'package:kino/ui/widgets/news/news_cubit.dart';
 import 'package:kino/ui/widgets/news/news_widget.dart';
+import 'package:kino/ui/widgets/news/tv_cubit.dart';
 import 'package:kino/ui/widgets/tv_show_list/tv_show_list_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -59,9 +60,18 @@ class ScreenFactory {
     return MovieTrailerWidget(youtubeKey: youtubeKey);
   }
 
+
   Widget makeNewsList() {
-    return BlocProvider(
-      create: (_) => NewsCubit(newsBloc: NewsBloc(const NewsState.inital())),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) =>
+              NewsCubit(newsBloc: NewsBloc(const NewsState.inital())),
+        ),
+        BlocProvider(
+          create: (_) => TVCubit(tvBloc: TVBloc(const TVState.inital())),
+        ),
+      ],
       child: const NewsWidget(),
     );
   }

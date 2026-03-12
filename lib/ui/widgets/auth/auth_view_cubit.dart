@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:kino/domain/api_client/api_client_exception.dart';
 import 'package:kino/domain/blocs/auth_bloc.dart';
-import 'package:kino/domain/services/auth_service.dart';
 
 abstract class AuthViewCubitState {}
 
@@ -61,9 +59,9 @@ class AuthViewCubit extends Cubit<AuthViewCubitState> {
   late final StreamSubscription<AuthState> authBlocSubscription;
 
   AuthViewCubit(
-    AuthViewCubitState initialState,
+    super.initialState,
     this.authBloc,
-  ) : super(initialState) {
+  ) {
     _onState(authBloc.state);
     authBlocSubscription = authBloc.stream.listen(_onState);
   }

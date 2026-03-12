@@ -16,12 +16,6 @@ class NewsEventLoadNextPage extends NewsEvent {
 
 class NewsEventLoadReset extends NewsEvent {}
 
-// class NewsEventLoadSearchMovie extends NewsEvent {
-//   final String query;
-
-//   NewsEventLoadSearchMovie(this.query);
-// }
-
 class NewsContainer {
   final List<Movie> movies;
   final int currentPage;
@@ -68,22 +62,16 @@ class NewsContainer {
 
 class NewsState {
   final NewsContainer popularMovieContainer;
-  // final NewsContainer searchMovieContainer;
-  // final String searchQuery;
-
-  // bool get isSearchMode => searchQuery.isNotEmpty;
   List<Movie> get movies =>
        popularMovieContainer.movies;
 
   const NewsState.inital()
       : popularMovieContainer = const NewsContainer.inital();
-        // searchMovieContainer = const NewsContainer.inital(),
-        // searchQuery = "";
+   
 
   NewsState({
     required this.popularMovieContainer,
-    // required this.searchMovieContainer,
-    // required this.searchQuery,
+    
   });
 
   @override
@@ -92,25 +80,21 @@ class NewsState {
       other is NewsState &&
           runtimeType == other.runtimeType &&
           popularMovieContainer == other.popularMovieContainer;
-          // searchMovieContainer == other.searchMovieContainer &&
-          // searchQuery == other.searchQuery;
+        
 
   @override
   int get hashCode =>
       popularMovieContainer.hashCode;
-      // searchMovieContainer.hashCode ^
-      // searchQuery.hashCode;
+   
 
   NewsState copyWith({
     NewsContainer? popularMovieContainer,
-    // NewsContainer? searchMovieContainer,
-    // String? searchQuery,
+
   }) {
     return NewsState(
       popularMovieContainer:
           popularMovieContainer ?? this.popularMovieContainer,
-      // searchMovieContainer: searchMovieContainer ?? this.searchMovieContainer,
-      // searchQuery: searchQuery ?? this.searchQuery,
+    
     );
   }
 }
@@ -119,17 +103,14 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   final _movieApiClient = MovieApiClient();
 
   NewsBloc(
-    NewsState initialState,
-  ) : super(initialState) {
+    super.initialState,
+  ) {
     on<NewsEvent>((event, emit) async {
       if (event is NewsEventLoadNextPage) {
         await onMovieListEventLoadNextPage(event, emit);
       } else if (event is NewsEventLoadReset) {
         await onMovieListEventLoadReset(event, emit);
       } 
-      // else if (event is NewsEventLoadSearchMovie) {
-      //   await onMovieListEventLoadSearchMovie(event, emit);
-      // }
     }, transformer: sequential());
   }
 
@@ -137,24 +118,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     NewsEventLoadNextPage event,
     Emitter<NewsState> emit,
   ) async {
-    // if (state.isSearchMode) {
-    //   final container = await _loadNextPage(
-    //     state.searchMovieContainer,
-    //     (nextPage) async {
-    //       final result = await _movieApiClient.searchMovie(
-    //         nextPage,
-    //         event.locale,
-    //         state.searchQuery,
-    //         Configuration.apiKey,
-    //       );
-    //       return result;
-    //     },
-    //   );
-    //   if (container != null) {
-    //     final newState = state.copyWith(searchMovieContainer: container);
-    //     emit(newState);
-    //   }
-    // } else {
+    
       final container = await _loadNextPage(
         state.popularMovieContainer,
         (nextPage) async {
@@ -196,14 +160,3 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     emit(const NewsState.inital());
   }
 
-  // Future<void> onMovieListEventLoadSearchMovie(
-  //   NewsEventLoadSearchMovie event,
-  //   Emitter<NewsState> emit,
-  // ) async {
-  //   if (state.searchQuery == event.query) return;
-  //   final newState = state.copyWith(
-  //     searchQuery: event.query,
-  //     searchMovieContainer: const NewsContainer.inital(),
-  //   );
-  //   emit(newState);
-  // }

@@ -10,6 +10,7 @@ class NewsRowData {
   final String title;
   final String releaseDate;
   final String overview;
+  final double voteAverage;
 
   NewsRowData({
     required this.id,
@@ -17,6 +18,7 @@ class NewsRowData {
     required this.title,
     required this.releaseDate,
     required this.overview,
+    required this.voteAverage,
   });
 }
 
@@ -37,10 +39,7 @@ class NewsCubitState {
   @override
   int get hashCode => movies.hashCode ^ localeTag.hashCode;
 
-  NewsCubitState copyWith({
-    List<NewsRowData>? movies,
-    String? localeTag,
-  }) {
+  NewsCubitState copyWith({List<NewsRowData>? movies, String? localeTag}) {
     return NewsCubitState(
       movies: movies ?? this.movies,
       localeTag: localeTag ?? this.localeTag,
@@ -55,9 +54,7 @@ class NewsCubit extends Cubit<NewsCubitState> {
   Timer? searchDebounce;
 
   NewsCubit({required this.newsBloc})
-    : super(
-        const NewsCubitState(movies: <NewsRowData>[], localeTag: ""),
-      ) {
+    : super(const NewsCubitState(movies: <NewsRowData>[], localeTag: "")) {
     Future.microtask(() {
       _onState(newsBloc.state);
       movieListBlocSubscription = newsBloc.stream.listen(_onState);
@@ -74,7 +71,7 @@ class NewsCubit extends Cubit<NewsCubitState> {
     if (state.localeTag == localeTag) return;
     final newState = state.copyWith(localeTag: localeTag);
     emit(newState);
-    _dateFormat = DateFormat.yMMMMd(localeTag);
+    _dateFormat = DateFormat.yMMMd(localeTag);
     newsBloc.add(NewsEventLoadReset());
     newsBloc.add(NewsEventLoadNextPage(localeTag));
   }
@@ -83,14 +80,6 @@ class NewsCubit extends Cubit<NewsCubitState> {
     if (index < state.movies.length - 1) return;
     newsBloc.add(NewsEventLoadNextPage(state.localeTag));
   }
-
-  // void searchMovie(String text) async {
-  //   searchDebounce?.cancel();
-  //   searchDebounce = Timer(const Duration(milliseconds: 300), () async {
-  //     newsBloc.add(NewsEventLoadSearchMovie(text));
-  //     newsBloc.add(NewsEventLoadNextPage(state.localeTag));
-  //   });
-  // }
 
   @override
   Future<void> close() {
@@ -109,6 +98,7 @@ class NewsCubit extends Cubit<NewsCubitState> {
       title: movie.title,
       releaseDate: releaseDateTitle,
       overview: movie.overview,
+      voteAverage: movie.voteAverage,
     );
   }
 }

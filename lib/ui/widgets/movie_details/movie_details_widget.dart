@@ -34,7 +34,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
         iconTheme: IconThemeData(
           color: const Color.fromARGB(255, 255, 255, 255),
         ),
-      ), //спецом вынесли тайтл в другой виджет чтобы не перезагружался весь экран потому что у нас и так там много всего еще после будет
+      ),
       body: const ColoredBox(
         color: Color.fromRGBO(24, 23, 27, 1.0),
         child: BodyWidget(),
@@ -44,7 +44,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 }
 
 class _TitleWidget extends StatelessWidget {
-  const _TitleWidget({super.key});
+  const _TitleWidget();
 
   @override
   Widget build(BuildContext context) {

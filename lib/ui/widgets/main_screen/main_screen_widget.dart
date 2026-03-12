@@ -3,14 +3,14 @@ import 'package:kino/domain/factories/screen_factory.dart';
 import 'package:kino/domain/services/auth_service.dart';
 
 class MainScreenWidget extends StatefulWidget {
-  const MainScreenWidget({Key? key}) : super(key: key);
+  const MainScreenWidget({super.key});
 
   @override
   _MainScreenWidgetState createState() => _MainScreenWidgetState();
 }
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
-  int _selectedTab = 0;
+  int _selectedTab = 2;
   final _screenFactory = ScreenFactory();
 
   void onSelectTab(int index) {
