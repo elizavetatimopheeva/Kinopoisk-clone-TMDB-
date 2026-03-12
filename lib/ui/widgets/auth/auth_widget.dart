@@ -21,13 +21,12 @@ class AuthWidget extends StatelessWidget {
         create: (_) => _AuthDataStorage(),
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Login to your account'),
+            title: const Text(
+              'Login to your account',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
-          body: ListView(
-            children: const [
-              _HeaderWidget(),
-            ],
-          ),
+          body: ListView(children: const [_HeaderWidget()]),
         ),
       ),
     );
@@ -48,10 +47,7 @@ class _HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const textStyle = TextStyle(
-      fontSize: 16,
-      color: Colors.black,
-    );
+    const textStyle = TextStyle(fontSize: 16, color: Colors.black);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -93,10 +89,7 @@ class _FormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authDataStorage = context.read<_AuthDataStorage>();
-    const textStyle = TextStyle(
-      fontSize: 16,
-      color: Color(0xFF212529),
-    );
+    const textStyle = TextStyle(fontSize: 16, color: Color(0xFF212529));
     const textFieldDecorator = InputDecoration(
       border: OutlineInputBorder(),
       contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -109,20 +102,14 @@ class _FormWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const _ErrorMessageWidget(),
-        const Text(
-          'Username',
-          style: textStyle,
-        ),
+        const Text('Username', style: textStyle),
         const SizedBox(height: 5),
         TextField(
           decoration: textFieldDecorator,
           onChanged: (text) => authDataStorage.login = text,
         ),
         const SizedBox(height: 20),
-        const Text(
-          'Password',
-          style: textStyle,
-        ),
+        const Text('Password', style: textStyle),
         const SizedBox(height: 5),
         TextField(
           decoration: textFieldDecorator,
@@ -140,7 +127,7 @@ class _FormWidget extends StatelessWidget {
               child: const Text('Reset password'),
             ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -154,13 +141,14 @@ class _AuthButtonWidget extends StatelessWidget {
     final cubit = context.watch<AuthViewCubit>();
     final authDataStorage = context.read<_AuthDataStorage>();
     const color = Color(0xFF01B4E4);
-    final canStartAuth = cubit.state is AuthViewCubitFormFillInProgressState ||
+    final canStartAuth =
+        cubit.state is AuthViewCubitFormFillInProgressState ||
         cubit.state is AuthViewCubitErrorState;
     final onPressed = canStartAuth
         ? () => cubit.auth(
-              login: authDataStorage.login,
-              password: authDataStorage.password,
-            )
+            login: authDataStorage.login,
+            password: authDataStorage.password,
+          )
         : null;
     final child = cubit.state is AuthViewCubitAuthProgressState
         ? const SizedBox(
@@ -178,10 +166,7 @@ class _AuthButtonWidget extends StatelessWidget {
           const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
         ),
         padding: MaterialStateProperty.all(
-          const EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 8,
-          ),
+          const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
         ),
       ),
       child: child,
@@ -204,10 +189,7 @@ class _ErrorMessageWidget extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 20),
       child: Text(
         errorMessage,
-        style: const TextStyle(
-          fontSize: 17,
-          color: Colors.red,
-        ),
+        style: const TextStyle(fontSize: 17, color: Colors.red),
       ),
     );
   }

@@ -1,34 +1,5 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-
-// class RatialScoreWidget extends StatefulWidget {
-//   const RatialScoreWidget({super.key});
-
-//   @override
-//   State<RatialScoreWidget> createState() => _RatialScoreWidgetState();
-// }
-
-// class _RatialScoreWidgetState extends State<RatialScoreWidget> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: Container(
-//         width: 100,
-//         height: 100,
-//         decoration: BoxDecoration(border: Border.all(color: Colors.red)),
-//         child: RadialPercentWidget(
-//           percent: 0.72,
-//           fillColor: Colors.black,
-//           lineColor: Colors.red,
-//           freeColor: Colors.yellow,
-//           lineWidth: 5,
-//           child: Text('72%', style: TextStyle(color: Colors.white)),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 class RadialPercentWidget extends StatelessWidget {
   final Widget child;

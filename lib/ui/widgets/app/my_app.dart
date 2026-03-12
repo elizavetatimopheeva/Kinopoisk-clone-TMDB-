@@ -10,11 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+
       title: 'Flutter Demo',
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.mainDarkBlue,
-        ),
+        appBarTheme: const AppBarTheme(backgroundColor: AppColors.mainDarkBlue),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: AppColors.mainDarkBlue,
           selectedItemColor: Colors.white,
@@ -26,10 +26,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
-        Locale('ru', 'RU'),
-        Locale('en', ''),
-      ],
+      supportedLocales: const [Locale('ru', 'RU'), Locale('en', '')],
       routes: mainNavigation.routes,
       initialRoute: MainNavigationRouteNames.loaderWidget,
       onGenerateRoute: mainNavigation.onGenerateRoute,

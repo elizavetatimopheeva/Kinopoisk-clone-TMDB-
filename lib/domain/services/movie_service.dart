@@ -1,5 +1,3 @@
-
-
 import 'package:kino/configuration/configuration.dart';
 import 'package:kino/domain/api_client/account_api_client.dart';
 import 'package:kino/domain/api_client/movie_api_client.dart';
