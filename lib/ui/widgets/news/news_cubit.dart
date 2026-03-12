@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:kino/domain/blocs/movie_list_bloc.dart';
 import 'package:kino/domain/blocs/news_bloc.dart';
 import 'package:kino/domain/entity/movie.dart';
 
@@ -85,13 +84,13 @@ class NewsCubit extends Cubit<NewsCubitState> {
     newsBloc.add(NewsEventLoadNextPage(state.localeTag));
   }
 
-  void searchMovie(String text) async {
-    searchDebounce?.cancel();
-    searchDebounce = Timer(const Duration(milliseconds: 300), () async {
-      newsBloc.add(NewsEventLoadSearchMovie(text));
-      newsBloc.add(NewsEventLoadNextPage(state.localeTag));
-    });
-  }
+  // void searchMovie(String text) async {
+  //   searchDebounce?.cancel();
+  //   searchDebounce = Timer(const Duration(milliseconds: 300), () async {
+  //     newsBloc.add(NewsEventLoadSearchMovie(text));
+  //     newsBloc.add(NewsEventLoadNextPage(state.localeTag));
+  //   });
+  // }
 
   @override
   Future<void> close() {

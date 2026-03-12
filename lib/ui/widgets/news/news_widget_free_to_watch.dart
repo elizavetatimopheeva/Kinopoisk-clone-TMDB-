@@ -10,7 +10,7 @@ class NewsWidgetUpcoming extends StatefulWidget {
 }
 
 class _NewsWidgetUpcomingState extends State<NewsWidgetUpcoming> {
-  final _category = 'movies';
+  String? _category = 'movies';
   @override
   Widget build(BuildContext context) {
     return Column(

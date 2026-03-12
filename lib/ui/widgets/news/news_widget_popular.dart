@@ -13,7 +13,7 @@ class NewsWidgetPopular extends StatefulWidget {
 }
 
 class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
-  final _category = 'movies';
+  String? _category = 'movies';
 
   @override
   void didChangeDependencies() {
@@ -41,23 +41,69 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
               ),
               DropdownButton<String>(
                 value: _category,
-                onChanged: (category) {},
+                onChanged: (String? newValue) {
+                  setState(() {
+                _category = newValue;
+              });
+
+                },
                 items: [
                   const DropdownMenuItem(
                     value: 'movies',
                     child: Text('Movies'),
                   ),
                   const DropdownMenuItem(value: 'tv', child: Text('TV')),
-                  const DropdownMenuItem(
-                    value: 'tvShows',
-                    child: Text('TVShows'),
-                  ),
+                  // const DropdownMenuItem(
+                  //   value: 'tvShows',
+                  //   child: Text('TVShows'),
+                  // ),
                 ],
+                
               ),
             ],
           ),
         ),
         const SizedBox(height: 20),
+        SizedBox(
+          height:400 ,
+          child: 
+             _getSelectedWidget(cubit),
+          
+        )
+        // _PopularMoviesWidget(cubit: cubit),
+      ],
+    );
+  }
+
+
+  Widget _getSelectedWidget(NewsCubit cubit) {
+   
+    switch (_category) {
+      case 'movies':
+        return _PopularMoviesWidget(cubit:cubit,);
+      case 'tv':
+        return _PopularTvWidget(cubit: cubit,);
+      default:
+        return _PopularMoviesWidget(cubit:cubit,);
+    }
+  }
+}
+
+
+
+class _PopularMoviesWidget extends StatelessWidget {
+  const _PopularMoviesWidget({
+    super.key,
+    required this.cubit,
+  });
+
+  final NewsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text('1'),
         SizedBox(
           height: 300,
           child: ListView.builder(
@@ -74,6 +120,42 @@ class _NewsWidgetPopularState extends State<NewsWidgetPopular> {
     );
   }
 }
+
+
+
+class _PopularTvWidget extends StatelessWidget {
+  const _PopularTvWidget({
+    super.key,
+    required this.cubit,
+  });
+
+  final NewsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text('2'),
+        SizedBox(
+          height: 300,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: cubit.state.movies.length,
+            itemExtent: 180,
+            itemBuilder: (BuildContext context, int index) {
+              cubit.showedMovieAtIndex(index);
+              return _MovieListItem(index: index);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+
+
+
 
 class _MovieListItem extends StatelessWidget {
   final int index;
