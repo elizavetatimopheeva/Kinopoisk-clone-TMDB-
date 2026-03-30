@@ -40,10 +40,9 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) => MovieDetails(
   video: json['video'] as bool,
   voteAverage: (json['vote_average'] as num).toDouble(),
   voteCount: (json['vote_count'] as num).toInt(),
-  credits: MovieDetailsCredits.fromJson(
-    json['credits'] as Map<String, dynamic>,
-  ),
+  credits: DetailsCredits.fromJson(json['credits'] as Map<String, dynamic>),
   videos: MovieDetailsVideos.fromJson(json['videos'] as Map<String, dynamic>),
+  images: DetailsPhotos.fromJson(json['images'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$MovieDetailsToJson(
@@ -80,6 +79,7 @@ Map<String, dynamic> _$MovieDetailsToJson(
   'vote_count': instance.voteCount,
   'credits': instance.credits.toJson(),
   'videos': instance.videos.toJson(),
+  'images': instance.images.toJson(),
 };
 
 Genre _$GenreFromJson(Map<String, dynamic> json) =>

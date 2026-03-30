@@ -10,7 +10,7 @@ class TV {
   final DateTime? firstAirDate;
   final List<int>? genreIds;
   final int id;
-  final String? name;
+  final String name;
   final List<String>? originCountry;
   final String? originalLanguage;
   final String originalName;

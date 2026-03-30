@@ -4,17 +4,17 @@ import 'package:json_annotation/json_annotation.dart';
 part 'movie_details_cast.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class MovieDetailsCredits {
+class DetailsCredits {
   final List<Actor> cast;
   final List<Employee> crew;
-  MovieDetailsCredits({
+  DetailsCredits({
     required this.cast,
     required this.crew,
   });
 
-   factory MovieDetailsCredits.fromJson(Map<String, dynamic> json)=> _$MovieDetailsCreditsFromJson(json);
+   factory DetailsCredits.fromJson(Map<String, dynamic> json)=> _$DetailsCreditsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MovieDetailsCreditsToJson(this); 
+  Map<String, dynamic> toJson() => _$DetailsCreditsToJson(this); 
 
 }
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)

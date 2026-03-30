@@ -1,9 +1,8 @@
-
 import 'package:json_annotation/json_annotation.dart';
 import 'package:kino/domain/entity/movie_date_parser.dart';
 import 'package:kino/domain/entity/movie_details_cast.dart';
+import 'package:kino/domain/entity/movie_details_photo.dart';
 import 'package:kino/domain/entity/movie_details_videos.dart';
-
 
 part 'movie_details.g.dart';
 
@@ -35,8 +34,9 @@ class MovieDetails {
   final bool video;
   final double voteAverage;
   final int voteCount;
-  final MovieDetailsCredits credits;
+  final DetailsCredits credits;
   final MovieDetailsVideos videos;
+  final DetailsPhotos images;
   MovieDetails({
     required this.adult,
     required this.backdropPath,
@@ -65,13 +65,12 @@ class MovieDetails {
     required this.voteCount,
     required this.credits,
     required this.videos,
+    required this.images,
   });
   factory MovieDetails.fromJson(Map<String, dynamic> json) =>
       _$MovieDetailsFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieDetailsToJson(this);
-
-
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)

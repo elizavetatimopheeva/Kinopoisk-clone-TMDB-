@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:kino/ui/navigation/main_navigation.dart';
-import 'package:kino/ui/theme/app_colors.dart';
+import 'package:kino/ui/theme/app_theme.dart';
 
 class MyApp extends StatelessWidget {
   static final mainNavigation = MainNavigation();
@@ -13,14 +13,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       title: 'Flutter Demo',
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(backgroundColor: AppColors.mainDarkBlue),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: AppColors.mainDarkBlue,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.grey,
-        ),
-      ),
+      theme: AppTheme.lightTheme,
+      // ThemeData(
+
+      //   appBarTheme: const AppBarTheme(backgroundColor: AppColors.mainDarkBlue),
+      //   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      //     backgroundColor: AppColors.mainDarkBlue,
+      //     selectedItemColor: Colors.white,
+      //     unselectedItemColor: Colors.grey,
+      //   ),
+      // ),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

@@ -6,8 +6,8 @@ part of 'movie_details_cast.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MovieDetailsCredits _$MovieDetailsCreditsFromJson(Map<String, dynamic> json) =>
-    MovieDetailsCredits(
+DetailsCredits _$DetailsCreditsFromJson(Map<String, dynamic> json) =>
+    DetailsCredits(
       cast: (json['cast'] as List<dynamic>)
           .map((e) => Actor.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -16,12 +16,11 @@ MovieDetailsCredits _$MovieDetailsCreditsFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$MovieDetailsCreditsToJson(
-  MovieDetailsCredits instance,
-) => <String, dynamic>{
-  'cast': instance.cast.map((e) => e.toJson()).toList(),
-  'crew': instance.crew.map((e) => e.toJson()).toList(),
-};
+Map<String, dynamic> _$DetailsCreditsToJson(DetailsCredits instance) =>
+    <String, dynamic>{
+      'cast': instance.cast.map((e) => e.toJson()).toList(),
+      'crew': instance.crew.map((e) => e.toJson()).toList(),
+    };
 
 Actor _$ActorFromJson(Map<String, dynamic> json) => Actor(
   adult: json['adult'] as bool,

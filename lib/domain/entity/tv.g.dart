@@ -13,7 +13,7 @@ TV _$TVFromJson(Map<String, dynamic> json) => TV(
       ?.map((e) => (e as num).toInt())
       .toList(),
   id: (json['id'] as num).toInt(),
-  name: json['name'] as String?,
+  name: json['name'] as String,
   originCountry: (json['origin_country'] as List<dynamic>?)
       ?.map((e) => e as String)
       .toList(),

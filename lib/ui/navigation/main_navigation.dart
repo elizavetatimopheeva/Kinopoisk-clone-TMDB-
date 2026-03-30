@@ -21,10 +21,19 @@ class MainNavigation {
     switch (settings.name) {
       case MainNavigationRouteNames.movieDetails:
         final arguments = settings.arguments;
-        final movieId = arguments is int ? arguments : 0;
-        return MaterialPageRoute(
-          builder: (_) => _screenFactory.makeMovieDetails(movieId),
-        );
+
+        if (arguments is MovieDetailsArguments) {
+          return MaterialPageRoute(
+            builder: (_) =>
+                _screenFactory.makeDetails(arguments.id, arguments.type),
+          );
+        } else if (arguments is int) {
+          return MaterialPageRoute(
+            builder: (_) =>
+                _screenFactory.makeDetails(arguments, DetailsType.movie),
+          );
+        }
+        return MaterialPageRoute(builder: (_) => const SizedBox.shrink());
       case MainNavigationRouteNames.movieTrailerWidget:
         final arguments = settings.arguments;
         final youtubeKey = arguments is String ? arguments : '';

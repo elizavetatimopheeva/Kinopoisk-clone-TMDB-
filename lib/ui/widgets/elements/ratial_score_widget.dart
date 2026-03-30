@@ -35,10 +35,7 @@ class RadialPercentWidget extends StatelessWidget {
           ),
         ),
         Center(
-          child: Padding(
-            padding: EdgeInsets.all(lineWidth * 1.5),
-            child: child,
-          ),
+          child: Padding(padding: EdgeInsets.all(lineWidth * 1), child: child),
         ),
       ],
     );
