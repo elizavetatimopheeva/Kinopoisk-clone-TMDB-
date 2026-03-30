@@ -1,16 +1,8 @@
-# kino
+# Kinopoisk clone TMDB
 
-A new Flutter project.
+https://github.com/user-attachments/assets/6fe75296-d918-4763-9b91-a448a8c3b44f
 
-## Getting Started
+![Image](https://github.com/user-attachments/assets/c5e44fc2-b431-4b1d-8677-4270a2646ad9)
 
-This project is a starting point for a Flutter application.
+![Image](https://github.com/user-attachments/assets/adfd3090-4741-4b45-9c81-38db1e20d37d)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
